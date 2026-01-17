@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rtf-black: #050505;
+  --color-rtf-blue: #00f6ff;
+  --color-rtf-purple: #7c7cff;
+  --color-rtf-purple-dark: #2a2a5a;
+  --color-rtf-orange: #ff7a00;
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-gradient-shift: gradient-shift 8s ease-in-out infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(0, 246, 255, 0.5); }
+    50% { opacity: 0.5; box-shadow: 0 0 10px rgba(0, 246, 255, 0.2); }
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+}
+
+/* Custom Utilities */
+.text-glow {
+  text-shadow: 
+    0 0 10px rgba(0, 246, 255, 0.5), 
+    0 0 20px rgba(0, 246, 255, 0.3),
+    0 0 40px rgba(0, 246, 255, 0.2);
+}
+
+.text-glow-purple {
+  text-shadow: 
+    0 0 10px rgba(124, 124, 255, 0.5), 
+    0 0 20px rgba(124, 124, 255, 0.3),
+    0 0 40px rgba(124, 124, 255, 0.2);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Reset & Base */
+:root {
+  color-scheme: dark;
+  background-color: var(--color-rtf-black);
+  color: white;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas {
+  touch-action: none;
+}
