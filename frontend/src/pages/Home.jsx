@@ -1,17 +1,27 @@
-import React, { Suspense } from 'react';
-import { Cpu } from 'lucide-react';
+import React, { Suspense, lazy } from 'react';
+import { Cpu, Loader2 } from 'lucide-react';
 import IntroVideo from '../components/hero/IntroVideo';
 import HeroScene from '../components/hero/HeroScene';
 import HeroText from '../components/hero/HeroText';
-import Domains from '../components/domains/Domains';
-import BuildCards from '../components/shared/BuildCards';
-import CinematicTimeline from '../components/about/Timeline';
-import Gallery3D from '../components/gallery/Gallery';
+
+// Lazy Load heavy sections
+const Domains = lazy(() => import('../components/domains/Domains'));
+const BuildCards = lazy(() => import('../components/shared/BuildCards'));
+const CinematicTimeline = lazy(() => import('../components/about/Timeline'));
+const Gallery3D = lazy(() => import('../components/gallery/Gallery'));
 
 function Loader() {
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-rtf-black text-rtf-blue">
        <Cpu className="animate-spin w-10 h-10" />
+    </div>
+  )
+}
+
+function SectionLoader() {
+  return (
+    <div className="w-full py-20 flex items-center justify-center text-rtf-blue">
+       <Loader2 className="animate-spin w-8 h-8 opacity-50" />
     </div>
   )
 }
@@ -23,20 +33,25 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
         <HeroText />
       </section>
 
-      {/* Domains Scroll Section */}
-      <Domains />
-      
-      {/* What We Build */}
-      <BuildCards />
+      <Suspense fallback={<SectionLoader />}>
+        {/* About Section */}
+        <CinematicTimeline />
 
-      {/* 3D Gallery */}
-      <Gallery3D />
+        {/* Domains Scroll Section */}
+        <Domains />
+        
+        {/* What We Build */}
+        <BuildCards />
+
+        {/* 3D Gallery */}
+        <Gallery3D />
+      </Suspense>
 
       {/* About Section */}
       <CinematicTimeline />

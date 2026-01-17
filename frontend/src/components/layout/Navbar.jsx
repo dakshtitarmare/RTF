@@ -38,18 +38,20 @@ function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
         className={twMerge(
-          "fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent",
-          scrolled || mobileMenuOpen ? "bg-black/80 backdrop-blur-xl border-white/10 py-4" : "bg-transparent py-6"
+          "fixed top-0 left-0 w-full z-[999] transition-all duration-300 border-b border-transparent",
+          // Mobile always has a stronger gradient for better visibility
+          "bg-gradient-to-b from-black/95 via-black/60 to-transparent backdrop-blur-sm md:from-transparent",
+          scrolled || mobileMenuOpen ? "bg-black/95 backdrop-blur-xl border-white/10 py-4" : "py-6"
         )}
       >
-        <div className="container mx-auto px-6 flex justify-between items-center">
+        <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center gap-2 group">
+          <NavLink to="/" className="flex items-center gap-2 group shrink-0">
              <div className="w-8 h-8 bg-rtf-blue rounded-full relative overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
                 <span className="font-black text-black text-xs relative z-10">RTF</span>
              </div>
-             <span className="font-bold text-white tracking-widest font-mono text-lg group-hover:text-rtf-blue transition-colors">
+             <span className="font-bold text-white tracking-widest font-mono text-base sm:text-lg group-hover:text-rtf-blue transition-colors">
                ROBO-TECH
              </span>
           </NavLink>
@@ -81,12 +83,13 @@ function Navbar() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Enhanced Visibility */}
           <button 
-            className="md:hidden text-white"
+            className="md:hidden text-white relative z-50 p-2.5 sm:p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 hover:bg-rtf-blue hover:border-rtf-blue hover:text-black transition-all duration-300 active:scale-95 shadow-lg shrink-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X /> : <Menu />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </motion.nav>

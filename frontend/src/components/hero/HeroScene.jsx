@@ -99,7 +99,7 @@ function Particles() {
 
 export default function HeroScene() {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 pointer-events-none">
       <Canvas gl={{ antialias: false }} dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 0, 10]} />
         <OrbitControls 
